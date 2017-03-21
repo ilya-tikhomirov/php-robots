@@ -1,0 +1,27 @@
+{
+  "name": "Php Robots",
+  "description": "Create your own robot",
+  "authors": [
+    {
+      "name": "Ilya Tikhomirov",
+      "email": "iilya1309@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": { "PhpRobots\\": "src/" }
+  },
+  "autoload-dev": {
+    "psr-4": { "Tests\\PhpRobots\\": "tests/" }
+  },
+  "require": {
+    "php": "^7.0.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.0"
+  },
+  "minimum-stability": "stable",
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "quicktest": "vendor/bin/phpunit --no-coverage"
+  }
+}
