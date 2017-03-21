@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpRobots\Base;
+namespace PhpRobots\Base\Exceptions;
 
 use Exception;
 

@@ -2,6 +2,8 @@
 
 namespace PhpRobots\Base;
 
+use PhpRobots\Base\Exceptions\MissedComponentException;
+
 class BaseRobot
 {
     /**
@@ -98,27 +100,27 @@ class BaseRobot
      * Check robot systems
      *
      * @return $this
-     * @throws \PhpRobots\Base\RobotException If engine not found
-     * @throws \PhpRobots\Base\RobotException If processor not found
-     * @throws \PhpRobots\Base\RobotException If memory not found
-     * @throws \PhpRobots\Base\RobotException If sensors not found
+     * @throws \PhpRobots\Base\Exceptions\MissedComponentException If engine not found
+     * @throws \PhpRobots\Base\Exceptions\MissedComponentException If processor not found
+     * @throws \PhpRobots\Base\Exceptions\MissedComponentException If memory not found
+     * @throws \PhpRobots\Base\Exceptions\MissedComponentException If sensors not found
      */
     protected function checkSystems(): BaseRobot
     {
         if (!$this->isEngineInstalled()) {
-            throw new RobotException('Engine not found');
+            throw new MissedComponentException('Engine');
         }
 
         if (!$this->isProcessorInstalled()) {
-            throw new RobotException('Processor not found');
+            throw new MissedComponentException('Processor');
         }
 
         if (!$this->isMemoryInstalled()) {
-            throw new RobotException('Memory not found');
+            throw new MissedComponentException('Memory');
         }
 
         if (!$this->isSensorsInstalled()) {
-            throw new RobotException('Sensors not found');
+            throw new MissedComponentException('Sensors');
         }
 
         return $this;
