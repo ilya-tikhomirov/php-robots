@@ -4,7 +4,7 @@ namespace PhpRobots\Base;
 
 use PhpRobots\Base\Exceptions\ParsingException;
 
-class BaseProcessor
+abstract class BaseProcessor
 {
     /**
      * Contains maximum actions count, which processor can do in one tact
@@ -60,19 +60,19 @@ class BaseProcessor
     public function setInstructions(array $instructions = []): BaseProcessor
     {
         return $this
-            ->parseEventsInstructions($instructions)
-            ->parseActionsInstructions($instructions);
+            ->validateEventsInstructions($instructions)
+            ->validateActionsInstructions($instructions);
     }
 
     /**
-     * Parse events instructions
+     * Validate events instructions
      *
      * @param array $instructions Raw Instructions
      * @return $this
      * @throws \PhpRobots\Base\Exceptions\ParsingException If events count more then processor cache
      * @throws \PhpRobots\Base\Exceptions\ParsingException If method doesn't exists
      */
-    protected function parseEventsInstructions(array $instructions = []): BaseProcessor
+    protected function validateEventsInstructions(array $instructions = []): BaseProcessor
     {
         if (array_key_exists('events', $instructions)) {
             if (count($instructions['events']) > $this->maxEventsCount) {
@@ -90,23 +90,23 @@ class BaseProcessor
     }
 
     /**
-     * Parse actions instructions
+     * Validate actions instructions
      *
      * @param array $instructions Raw Instructions
      * @return $this
      * @throws \PhpRobots\Base\Exceptions\ParsingException If events count more then processor cache
      * @throws \PhpRobots\Base\Exceptions\ParsingException If method doesn't exists
      */
-    protected function parseActionsInstructions(array $instructions = []): BaseProcessor
+    protected function validateActionsInstructions(array $instructions = []): BaseProcessor
     {
         if (array_key_exists('actions', $instructions)) {
-            if (count($instructions['actions']) > $this->maxEventsCount) {
+            if (count($instructions['actions']) > $this->maxActionsCount) {
                 throw new ParsingException('Actions count more then processor actions cache');
             }
 
-            foreach ($instructions['actions'] as $event) {
-                if (method_exists($this, $event['method'])) {
-                    throw new ParsingException('Actions method ' . $event['method'] . ' not found');
+            foreach ($instructions['actions'] as $action) {
+                if (method_exists($this, $action['method'])) {
+                    throw new ParsingException('Actions method ' . $action['method'] . ' not found');
                 }
             }
         }

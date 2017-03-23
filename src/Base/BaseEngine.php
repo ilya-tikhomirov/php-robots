@@ -2,7 +2,7 @@
 
 namespace PhpRobots\Base;
 
-class BaseEngine
+abstract class BaseEngine
 {
 
 }

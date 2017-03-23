@@ -2,7 +2,7 @@
 
 namespace PhpRobots\Base;
 
-class BaseSensor
+abstract class BaseSensor
 {
 
 }

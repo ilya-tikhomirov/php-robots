@@ -2,7 +2,7 @@
 
 namespace PhpRobots\Base;
 
-class BaseComponent
+abstract class BaseComponent
 {
 
 }

@@ -4,8 +4,15 @@ namespace PhpRobots\Base;
 
 use PhpRobots\Base\Exceptions\MissedComponentException;
 
-class BaseRobot
+abstract class BaseRobot
 {
+    /**
+     * Body
+     *
+     * @var \PhpRobots\Base\BaseBody
+     */
+    protected $body;
+
     /**
      * Engine
      *
@@ -107,6 +114,10 @@ class BaseRobot
      */
     protected function checkSystems(): BaseRobot
     {
+        if (!$this->isBodyInstalled()) {
+            throw new MissedComponentException('Body');
+        }
+
         if (!$this->isEngineInstalled()) {
             throw new MissedComponentException('Engine');
         }
@@ -125,6 +136,17 @@ class BaseRobot
 
         return $this;
     }
+
+    /**
+     * Is body installed
+     *
+     * @return bool
+     */
+    public function isBodyInstalled()
+    {
+        return (bool) $this->body;
+    }
+
 
     /**
      * Is engine installed

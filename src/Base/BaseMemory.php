@@ -2,7 +2,7 @@
 
 namespace PhpRobots\Base;
 
-class BaseMemory
+abstract class BaseMemory
 {
 
 }
