@@ -2,7 +2,7 @@
 
 namespace PhpRobots\Base;
 
-abstract class BaseBody
+abstract class BaseArmor
 {
     /**
      * Durability

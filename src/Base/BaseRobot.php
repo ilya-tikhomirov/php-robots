@@ -7,11 +7,11 @@ use PhpRobots\Base\Exceptions\MissedComponentException;
 abstract class BaseRobot
 {
     /**
-     * Body
+     * Armor
      *
-     * @var \PhpRobots\Base\BaseBody
+     * @var \PhpRobots\Base\BaseArmor
      */
-    protected $body;
+    protected $armor;
 
     /**
      * Engine
@@ -100,7 +100,7 @@ abstract class BaseRobot
      */
     public function run(): BaseRobot
     {
-        return $this->checkSystems();
+        return $this->checkSystem();
     }
 
     /**
@@ -112,9 +112,9 @@ abstract class BaseRobot
      * @throws \PhpRobots\Base\Exceptions\MissedComponentException If memory not found
      * @throws \PhpRobots\Base\Exceptions\MissedComponentException If sensors not found
      */
-    protected function checkSystems(): BaseRobot
+    protected function checkSystem(): BaseRobot
     {
-        if (!$this->isBodyInstalled()) {
+        if (!$this->isArmorInstalled()) {
             throw new MissedComponentException('Body');
         }
 
@@ -138,22 +138,21 @@ abstract class BaseRobot
     }
 
     /**
-     * Is body installed
+     * Is armor installed
      *
      * @return bool
      */
-    public function isBodyInstalled()
+    public function isArmorInstalled(): bool
     {
-        return (bool) $this->body;
+        return (bool) $this->armor;
     }
-
 
     /**
      * Is engine installed
      *
      * @return bool
      */
-    public function isEngineInstalled()
+    public function isEngineInstalled(): bool
     {
         return (bool) $this->engine;
     }
@@ -163,7 +162,7 @@ abstract class BaseRobot
      *
      * @return bool
      */
-    public function isProcessorInstalled()
+    public function isProcessorInstalled(): bool
     {
         return (bool) $this->processor;
     }
@@ -173,7 +172,7 @@ abstract class BaseRobot
      *
      * @return bool
      */
-    public function isMemoryInstalled()
+    public function isMemoryInstalled(): bool
     {
         return (bool) $this->memory;
     }
@@ -183,7 +182,7 @@ abstract class BaseRobot
      *
      * @return bool
      */
-    public function isSensorsInstalled()
+    public function isSensorsInstalled(): bool
     {
         return (bool) $this->sensors;
     }
